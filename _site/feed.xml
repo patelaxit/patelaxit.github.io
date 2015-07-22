@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Analog and RF Musings</title>
+    <description>A blog about my journey in learning analog &amp; RF electronics</description>
+    <link>http://patelaxit.github.io/</link>
+    <atom:link href="http://patelaxit.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>Hello World!</title>
+        <description>&lt;p&gt;Hello!&lt;/p&gt;
+
+&lt;p&gt;My name is Axit Patel and this is my first blog post! I’ve always wanted to write my own blog, but for one reason or another I’ve always put it off. I fiddled with &lt;a href=&quot;https://wordpress.org&quot;&gt;Wordpress&lt;/a&gt; but I couldn’t get it set up the way I would’ve liked. However, with Github Pages and Jekyll I had no excuse to not start! So here we are with this first blog post.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-little-about-me&quot;&gt;A little about me&lt;/h3&gt;
+
+&lt;p&gt;I’m an undergraduate at Virginia Tech studying electrical engineering. My main interests include analog &amp;amp; RF circuit design along with embedded system design. I am currently interning at &lt;a href=&quot;https://www.ni.com&quot;&gt;National Instruments&lt;/a&gt; as an Analog Hardware intern. In the past I’ve worked at &lt;a href=&quot;www.analog.com&quot;&gt;Analog Devices&lt;/a&gt; as a Product development &amp;amp; Testing Intern. Both of these companies have been amazing places to work with distinct workplace environments. These internships have provided me with great learning opportunities and I’ve tried to absorb the maximum amount of knowledge that I could from my colleagues during time my there.&lt;/p&gt;
+
+&lt;h3 id=&quot;why-am-i-doing-this&quot;&gt;Why am I doing this?&lt;/h3&gt;
+
+&lt;p&gt;So my goal with this blog is to get in the habit of communicating techincal ideas while also creating my own little corner on the Internet. Over the past few years, I have realized that I understand concepts a lot more intuitively when I have to present the ideas in a simple yet correct manner to non-technical people. I will be posting about things that interest me in the field of electrical engineering, and I hope it’ll help others who might have struggled with similar concepts. If you’d like to following along, please &lt;a href=&quot;/feed.xml&quot;&gt;subscribe&lt;/a&gt; to this blog!&lt;/p&gt;
+
+&lt;p&gt;Thanks!&lt;/p&gt;
+</description>
+        <pubDate>Mon, 25 Aug 2014 00:00:00 -0500</pubDate>
+        <link>http://patelaxit.github.io/2014/08/25/hello-world/</link>
+        <guid isPermaLink="true">http://patelaxit.github.io/2014/08/25/hello-world/</guid>
+      </item>
+    
+  </channel>
+</rss>
