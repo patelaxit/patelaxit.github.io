@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Setting up MathJax with Jekyll &#8211; Analog and RF Musings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A tutorial on using MathJax with Jekyll and basic usage of MathJax.">
+    <meta name="author" content="Axit Patel">
+    <meta name="keywords" content="">
+    <link rel="canonical" href="http://patelaxit.github.io/2015/08/24/setting-up-mathjax/">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed for Analog and RF Musings" href="/feed.xml" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/pixyll.css?201507261209" type="text/css">
+
+    <!-- Fonts -->
+    <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
+    
+
+
+    <!-- Open Graph -->
+    <!-- From: https://github.com/mmistakes/hpstr-jekyll-theme/blob/master/_includes/head.html -->
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Setting up MathJax with Jekyll">
+    <meta property="og:description" content="A blog about my journey in learning analog &amp; RF electronics">
+    <meta property="og:url" content="http://patelaxit.github.io/2015/08/24/setting-up-mathjax/">
+    <meta property="og:site_name" content="Analog and RF Musings">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    
+        <meta name="twitter:site" content="@patelaxit" />
+    
+    <meta name="twitter:title" content="Setting up MathJax with Jekyll" />
+    <meta name="twitter:description" content="A tutorial on using MathJax with Jekyll and basic usage of MathJax." />
+    <meta name="twitter:url" content="http://patelaxit.github.io/2015/08/24/setting-up-mathjax/" />
+        
+    
+</head>
+
+<body class="site">
+  <div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+  <div class="mt2 wrap">
+    <div class="measure">
+      <a href="http://patelaxit.github.io" class="site-title">Analog and RF Musings</a>
+      <nav class="site-nav">
+        <!-- <a href="/about/">About</a -->
+<a href="/">Home</a>
+      </nav>
+      <div class="clearfix"></div>
+      
+    </div>
+  </div>
+</header>
+
+
+    <div class="post p2 p-responsive wrap" role="main">
+      <div class="measure">
+        
+
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<div class="post-header mb2">
+  <h1>Setting up MathJax with Jekyll</h1>
+  <span class="post-meta">Aug 24, 2015</span><br>
+    
+  <span class="post-meta small">
+  
+    3 minute read
+  
+  </span>
+</div>
+
+<article class="post-content">
+  <h3 id="why-mathjax">Why MathJax?</h3>
+<p>Since most of the posts in this blog will talk about electrical engineering concepts, it’d be wrong to introduce or discuss these topics without any kind of mathematical rigor. This means however, that the equations in the blog posts need to be easily readable and <a href="www.mathjax.org">MathJax</a> is perfect for this. According to its homepage, MathJax is <em>a Javascript display engine for mathematics that works in all the browsers</em>.</p>
+
+<h3 id="how-to-set-it-up">How to set it up?</h3>
+<p>It is really easy to set up MathJax with Jekyll. Note that I installed MathJax with the Pixyll theme pre-installed, but the installation process is the same regardless of the theme.</p>
+
+<p>The first thing to do is to make sure that the Ruby library that parses the Markdown in our posts is updated in the <code>_config.yml</code> file. The Markdown processor should be updated to <code>kramdown</code>. This is what the line would look like in <code>_config.yml</code>:</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># Build settings</span>
+<span class="ss">markdown</span><span class="p">:</span>     <span class="n">kramdown</span></code></pre></div>
+
+<p>Now that we have changed the Markdown parser, we need to include the HTML script tag that will include MathJax in all of our posts. We need to put the script tag in the layout file that gets used when rendering all of our posts. Conveniently this happens to be <code>post.html</code> in the <code>_layouts</code> folder of your jekyll site. Open up <code>_layouts/post.html</code> and include the following code in the beginning of the file:</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> 
+        <span class="na">src=</span><span class="s">&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/script&gt;</span></code></pre></div>
+
+<p>That is all you need to do! Now you should be able to render LaTeX-like equations in your blog posts on all browsers.</p>
+
+<h3 id="basic-usage">Basic Usage</h3>
+<p>I’ll be assuming that the reader has a little familiarity with LaTeX and its syntax. Although most of LaTeX syntax is valid for MathJax, there are some cases where they don’t behave in the same manner.</p>
+
+<p>There are two ways to display mathematical equations using MathJax: <code>inline</code> or <code>block</code>. As the name suggests, inline mode allows us to render the mathematical expressions inline with regular text like this: \( x^2 + y^2 = 0 \). To render our text inline, we need to use <code>\\( ... \\)</code> as delimeters in our markdown. Note that the default syntax for the delimeters according the MathJax docs is <code>\( ... \(</code>, but since Jekyll uses markdown, we have to escape <code>\</code> by using another <code>\</code>.</p>
+
+<p>For example, in order to render the expression \( i = \sqrt{-1} \), your markdown would look as follows:</p>
+
+<div class="highlight"><pre><code class="language-tex" data-lang="tex"><span class="k">\\</span>( i = <span class="k">\sqrt</span><span class="nb">{</span>-1<span class="nb">}</span> <span class="k">\\</span>)</code></pre></div>
+
+<p>Note that <code>$ ... $</code> is also a valid delimeter for inline rending mode. It is however disabled by default due to the fact that <code>$</code> is used quite often even in non-mathematical contexts. You can enable it by following the instructions <a href="http://docs.mathjax.org/en/latest/start.html">here</a>.</p>
+
+<p>The delimeters to render our equations in block mode are <code>$$ ... $$</code> and <code>\\[ \\]</code>. The double dollar signs are used much more frequently because they aren’t that common besides in LaTeX code. An example of using this mode is presented below.</p>
+
+<div class="highlight"><pre><code class="language-latex" data-lang="latex"><span class="c">% This is a comment</span>
+<span class="c">% Equation of a circle</span>
+
+<span class="sb">$$</span><span class="nb"> </span><span class="nv">\frac</span><span class="nb">{x^</span><span class="m">2</span><span class="nb">}{R} </span><span class="o">+</span><span class="nb"> </span><span class="nv">\frac</span><span class="nb">{y^</span><span class="m">2</span><span class="nb">}{R} </span><span class="o">=</span><span class="nb"> </span><span class="m">0</span><span class="nb"> </span><span class="nv">\\</span><span class="nb"></span>
+<span class="nb">x^</span><span class="m">2</span><span class="nb"> </span><span class="o">+</span><span class="nb"> y^</span><span class="m">2</span><span class="nb"> </span><span class="o">=</span><span class="nb"> R </span><span class="s">$$</span></code></pre></div>
+
+<script type="math/tex; mode=display">
+% This is a comment
+% Equation of a circle
+
+\frac{x^2}{R} + \frac{y^2}{R} = 0 \\
+x^2 + y^2 = R
+</script>
+
+<p>Well that is all for today! I hope this blog post was helpful to those setting up their blogs to use MathJax.</p>
+
+</article>
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="center">
+  <div class="measure">
+    <small>
+      <a href="http://github.com/patelaxit/patelaxit.github.io">hosted on github</a>
+        &curren;
+        <a href="http://http://jekyllrb.com/">generated by jekyll</a>
+        &curren;
+        <a href="http://pixyll.com">themed by Pixyll</a>
+    </small>
+  </div>
+</footer>
+
+</body>
+</html>

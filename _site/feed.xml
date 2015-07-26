@@ -7,6 +7,61 @@
     <atom:link href="http://patelaxit.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Setting up MathJax with Jekyll</title>
+        <description>&lt;h3 id=&quot;why-mathjax&quot;&gt;Why MathJax?&lt;/h3&gt;
+&lt;p&gt;Since most of the posts in this blog will talk about electrical engineering concepts, it’d be wrong to introduce or discuss these topics without any kind of mathematical rigor. This means however, that the equations in the blog posts need to be easily readable and &lt;a href=&quot;www.mathjax.org&quot;&gt;MathJax&lt;/a&gt; is perfect for this. According to its homepage, MathJax is &lt;em&gt;a Javascript display engine for mathematics that works in all the browsers&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;how-to-set-it-up&quot;&gt;How to set it up?&lt;/h3&gt;
+&lt;p&gt;It is really easy to set up MathJax with Jekyll. Note that I installed MathJax with the Pixyll theme pre-installed, but the installation process is the same regardless of the theme.&lt;/p&gt;
+
+&lt;p&gt;The first thing to do is to make sure that the Ruby library that parses the Markdown in our posts is updated in the &lt;code&gt;_config.yml&lt;/code&gt; file. The Markdown processor should be updated to &lt;code&gt;kramdown&lt;/code&gt;. This is what the line would look like in &lt;code&gt;_config.yml&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# Build settings&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;markdown&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;kramdown&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now that we have changed the Markdown parser, we need to include the HTML script tag that will include MathJax in all of our posts. We need to put the script tag in the layout file that gets used when rendering all of our posts. Conveniently this happens to be &lt;code&gt;post.html&lt;/code&gt; in the &lt;code&gt;_layouts&lt;/code&gt; folder of your jekyll site. Open up &lt;code&gt;_layouts/post.html&lt;/code&gt; and include the following code in the beginning of the file:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;text/javascript&amp;quot;&lt;/span&gt; 
+        &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;That is all you need to do! Now you should be able to render LaTeX-like equations in your blog posts on all browsers.&lt;/p&gt;
+
+&lt;h3 id=&quot;basic-usage&quot;&gt;Basic Usage&lt;/h3&gt;
+&lt;p&gt;I’ll be assuming that the reader has a little familiarity with LaTeX and its syntax. Although most of LaTeX syntax is valid for MathJax, there are some cases where they don’t behave in the same manner.&lt;/p&gt;
+
+&lt;p&gt;There are two ways to display mathematical equations using MathJax: &lt;code&gt;inline&lt;/code&gt; or &lt;code&gt;block&lt;/code&gt;. As the name suggests, inline mode allows us to render the mathematical expressions inline with regular text like this: \( x^2 + y^2 = 0 \). To render our text inline, we need to use &lt;code&gt;\\( ... \\)&lt;/code&gt; as delimeters in our markdown. Note that the default syntax for the delimeters according the MathJax docs is &lt;code&gt;\( ... \(&lt;/code&gt;, but since Jekyll uses markdown, we have to escape &lt;code&gt;\&lt;/code&gt; by using another &lt;code&gt;\&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;For example, in order to render the expression \( i = \sqrt{-1} \), your markdown would look as follows:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-tex&quot; data-lang=&quot;tex&quot;&gt;&lt;span class=&quot;k&quot;&gt;\\&lt;/span&gt;( i = &lt;span class=&quot;k&quot;&gt;\sqrt&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;{&lt;/span&gt;-1&lt;span class=&quot;nb&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;\\&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note that &lt;code&gt;$ ... $&lt;/code&gt; is also a valid delimeter for inline rending mode. It is however disabled by default due to the fact that &lt;code&gt;$&lt;/code&gt; is used quite often even in non-mathematical contexts. You can enable it by following the instructions &lt;a href=&quot;http://docs.mathjax.org/en/latest/start.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The delimeters to render our equations in block mode are &lt;code&gt;$$ ... $$&lt;/code&gt; and &lt;code&gt;\\[ \\]&lt;/code&gt;. The double dollar signs are used much more frequently because they aren’t that common besides in LaTeX code. An example of using this mode is presented below.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-latex&quot; data-lang=&quot;latex&quot;&gt;&lt;span class=&quot;c&quot;&gt;% This is a comment&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;% Equation of a circle&lt;/span&gt;
+
+&lt;span class=&quot;sb&quot;&gt;$$&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\frac&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;{x^&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;}{R} &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\frac&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;{y^&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;}{R} &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;x^&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; y^&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; R &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;$$&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;
+% This is a comment
+% Equation of a circle
+
+\frac{x^2}{R} + \frac{y^2}{R} = 0 \\
+x^2 + y^2 = R
+&lt;/script&gt;
+
+&lt;p&gt;Well that is all for today! I hope this blog post was helpful to those setting up their blogs to use MathJax.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 24 Aug 2015 00:00:00 -0500</pubDate>
+        <link>http://patelaxit.github.io/2015/08/24/setting-up-mathjax/</link>
+        <guid isPermaLink="true">http://patelaxit.github.io/2015/08/24/setting-up-mathjax/</guid>
+      </item>
+    
+      <item>
         <title>Hello World!</title>
         <description>&lt;p&gt;Hello!&lt;/p&gt;
 
@@ -22,9 +77,9 @@
 
 &lt;p&gt;Thanks!&lt;/p&gt;
 </description>
-        <pubDate>Mon, 25 Aug 2014 00:00:00 -0500</pubDate>
-        <link>http://patelaxit.github.io/2014/08/25/hello-world/</link>
-        <guid isPermaLink="true">http://patelaxit.github.io/2014/08/25/hello-world/</guid>
+        <pubDate>Fri, 21 Aug 2015 00:00:00 -0500</pubDate>
+        <link>http://patelaxit.github.io/2015/08/21/hello-world/</link>
+        <guid isPermaLink="true">http://patelaxit.github.io/2015/08/21/hello-world/</guid>
       </item>
     
   </channel>
